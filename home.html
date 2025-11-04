@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Home | Farmified</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      background-color: #f9fafb;
+      color: #333;
+      display: flex;
+      min-height: 100vh;
+    }
+
+    /* Sidebar */
+    .sidebar {
+      background-color: #2e7d32; /* green tone */
+      color: white;
+      width: 220px;
+      display: flex;
+      flex-direction: column;
+      padding: 1rem;
+      box-sizing: border-box;
+      position: relative;
+    }
+
+    .sidebar h1 {
+      font-size: 1.5rem;
+      margin-bottom: 2rem;
+      text-align: center;
+    }
+
+    .sidebar a {
+      color: white;
+      text-decoration: none;
+      padding: 0.5rem 1rem;
+      margin-bottom: 0.3rem;
+      display: block;
+      border-radius: 5px;
+      font-weight: bold;
+    }
+
+    .sidebar a:hover {
+      background-color: #1b4d23;
+    }
+
+    /* Dropdown in sidebar */
+    .dropdown {
+      position: relative;
+    }
+
+    .dropdown-content {
+      display: none;
+      background-color: #f9fafb;
+      color: #333;
+      margin-left: 0;
+      border-radius: 5px;
+      overflow: hidden;
+      margin-bottom: 0.5rem;
+    }
+
+    .dropdown-content a {
+      color: #333;
+      padding: 0.5rem 1rem;
+      display: block;
+      font-weight: normal;
+    }
+
+    .dropdown-content a:hover {
+      background-color: #f1f1f1;
+    }
+
+    .dropdown:hover .dropdown-content {
+      display: block;
+    }
+
+    /* Sign out button */
+    .sign-out {
+      position: absolute;
+      bottom: 1rem;
+      width: calc(100% - 2rem);
+      text-align: center;
+    }
+
+    .sign-out button {
+      width: 100%;
+      background-color: #c62828; /* red */
+      border: none;
+      border-radius: 5px;
+      padding: 0.6rem;
+      color: white;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background-color 0.2s;
+    }
+
+    .sign-out button:hover {
+      background-color: #8e0000;
+    }
+
+    /* Main content */
+    .main-content {
+      flex-grow: 1;
+      padding: 2rem;
+    }
+
+    h2 {
+      margin-top: 0;
+      color: #2e7d32;
+    }
+
+    /* Widgets */
+    .widgets-container {
+      display: grid;
+      grid-template-columns: 1fr 1fr; /* two large widgets side by side */
+      gap: 2rem;
+      margin-top: 2rem;
+    }
+
+    .widget {
+      background-color: white;
+      border-radius: 10px;
+      padding: 2rem;
+      box-shadow: 0px 4px 8px rgba(0,0,0,0.1);
+      text-align: center;
+      transition: transform 0.2s, box-shadow 0.2s;
+      font-size: 1.1rem;
+    }
+
+    .widget:hover {
+      transform: translateY(-5px);
+      box-shadow: 0px 8px 16px rgba(0,0,0,0.2);
+    }
+
+    .widget h3 {
+      margin-bottom: 1.5rem;
+      color: #2e7d32;
+      font-size: 1.5rem;
+    }
+
+    .widget p {
+      margin-bottom: 1.5rem;
+      font-size: 1.2rem;
+      color: #555;
+    }
+
+    .widget button {
+      background-color: #2e7d32;
+      color: white;
+      padding: 0.7rem 1.5rem;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 1rem;
+    }
+
+    .widget button:hover {
+      background-color: #1b4d23;
+    }
+
+    footer {
+      background-color: #f1f1f1;
+      color: #555;
+      text-align: center;
+      padding: 1rem;
+      margin-top: 2rem;
+    }
+
+    @media (max-width: 768px) {
+      body {
+        flex-direction: column;
+      }
+      .sidebar {
+        width: 100%;
+        flex-direction: row;
+        overflow-x: auto;
+        position: relative;
+      }
+      .sidebar h1 {
+        display: none;
+      }
+      .sidebar a {
+        margin: 0 0.3rem;
+      }
+      .dropdown-content {
+        position: static;
+      }
+      .sign-out {
+        position: static;
+        margin-left: auto;
+      }
+      .sign-out button {
+        width: auto;
+      }
+      .widgets-container {
+        grid-template-columns: 1fr; /* stack widgets on mobile */
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="sidebar">
+    <h1>Farmified</h1>
+
+    <a href="#">Home</a>
+
+    <div class="dropdown">
+      <a href="#">Database</a>
+      <div class="dropdown-content">
+        <a href="#">Add Entry</a>
+        <a href="#">View Records</a>
+        <a href="#">Export Data</a>
+      </div>
+    </div>
+
+    <div class="dropdown">
+      <a href="#">Connect</a>
+      <div class="dropdown-content">
+        <a href="#">Send Message</a>
+        <a href="#">Message Screen Profiles</a>
+      </div>
+    </div>
+
+    <div class="dropdown">
+      <a href="#">Profile</a>
+      <div class="dropdown-content">
+        <a href="#">Edit</a>
+        <a href="#">View</a>
+        <a href="#">Notifications</a>
+      </div>
+    </div>
+
+    <a href="#">About</a>
+
+    <div class="sign-out">
+      <button onclick="alert('Signing out...')">Sign Out</button>
+    </div>
+  </div>
+
+  <div class="main-content">
+    <h2>Welcome!</h2>
+    <p>Here's a quick overview of your Farmified app:</p>
+
+    <div class="widgets-container">
+      <!-- Database Widget -->
+      <div class="widget">
+        <h3>Database</h3>
+        <p>Entries: 124</p>
+        <button onclick="alert('Go to Database')">View</button>
+      </div>
+
+      <!-- Messages Widget -->
+      <div class="widget">
+        <h3>Messages</h3>
+        <p>Unread: 5</p>
+        <button onclick="alert('Go to Messages')">Check</button>
+      </div>
+    </div>
+
+    <footer>
+      <p>&copy; 2025 Farmified. All rights reserved.</p>
+    </footer>
+  </div>
+</body>
+</html>
