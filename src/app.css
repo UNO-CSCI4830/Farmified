@@ -1,0 +1,229 @@
+/* ============================
+   Global Reset
+============================ */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Arial', sans-serif;
+}
+
+html, body, #root {
+  height: 100%;
+  width: 100%;
+  background-color: #f4f6f8;
+  overflow-x: hidden;
+  margin: 0;
+  padding: 0;
+}
+
+/* ============================
+   App Container
+============================ */
+.app-container {
+  display: flex;
+  min-height: 100vh;
+  width: 100%;
+  overflow: hidden;
+}
+
+/* ============================
+   Sidebar
+============================ */
+.sidebar {
+  width: 220px;
+  background: linear-gradient(180deg, #2e7d32, #1b4d23);
+  color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 1.5rem 1rem;
+  position: sticky;
+  top: 0;
+  height: 100vh;
+}
+
+.sidebar h1 {
+  text-align: center;
+  margin-bottom: 2rem;
+  font-size: 1.6rem;
+}
+
+.sidebar a, .sidebar .dropdown-title {
+  display: block;
+  padding: 0.6rem 1rem;
+  margin-bottom: 0.5rem;
+  border-radius: 6px;
+  text-decoration: none;
+  font-weight: bold;
+  color: white;
+  transition: background 0.2s;
+}
+
+.sidebar a:hover, .sidebar .dropdown-title:hover {
+  background-color: rgba(255,255,255,0.15);
+}
+
+.dropdown-content {
+  display: none;
+  margin-left: 0.5rem;
+  margin-bottom: 0.5rem;
+  border-radius: 6px;
+  background-color: #f4f6f8;
+  color: #333;
+  overflow: hidden;
+}
+
+.dropdown-content a {
+  color: #333;
+  padding: 0.5rem 1rem;
+  display: block;
+  font-weight: normal;
+  text-decoration: none;
+  transition: background 0.2s;
+}
+
+.dropdown-content a:hover {
+  background-color: #e0e0e0;
+}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+/* Sign Out Button */
+.sign-out {
+  margin-top: auto;
+}
+
+.sign-out button {
+  width: 100%;
+  background-color: #c62828;
+  border: none;
+  border-radius: 6px;
+  padding: 0.6rem;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.sign-out button:hover {
+  background-color: #8e0000;
+}
+
+/* ============================
+   Main Content
+============================ */
+.main-content {
+  flex-grow: 1;
+  padding: 1.5rem;
+  overflow-y: auto;
+  display: flex;
+  height: 100%;
+  justify-content: flex-start;
+  flex-direction: column;
+}
+
+h2 {
+  margin-bottom: 1rem;
+  color: #2e7d32;
+}
+
+/* Widgets */
+.widgets-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); /* smaller min-width to fit more widgets */
+  gap: 1rem;
+  flex-grow: 1;
+  margin-top: 1rem;
+}
+
+.widget {
+  background-color: white;
+  border-radius: 12px;
+  padding: 1.5rem;
+  box-shadow: 0px 6px 12px rgba(0,0,0,0.08);
+  text-align: center;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.widget:hover {
+  transform: translateY(-5px);
+  box-shadow: 0px 12px 24px rgba(0,0,0,0.12);
+}
+
+.widget h3 {
+  margin-bottom: 1rem;
+  color: #2e7d32;
+  font-size: 1.4rem;
+}
+
+.widget p {
+  margin-bottom: 1rem;
+  font-size: 1.1rem;
+  color: #555;
+}
+
+.widget button {
+  background-color: #2e7d32;
+  color: white;
+  padding: 0.6rem 1.2rem;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.widget button:hover {
+  background-color: #1b4d23;
+}
+
+/* ============================
+   Footer
+============================ */
+footer {
+  background-color: #f1f1f1;
+  color: #555;
+  text-align: center;
+  padding: 1rem;
+  margin-top: 2rem;
+  border-radius: 6px;
+  box-shadow: inset 0 1px 2px rgba(0,0,0,0.05);
+}
+
+/* ============================
+   Responsive
+============================ */
+@media (max-width: 768px) {
+  .app-container {
+    flex-direction: column;
+  }
+
+  .sidebar {
+  width: 220px;
+  min-height: 100vh;   /* ensures sidebar fills viewport */
+  padding: 1rem;
+}
+
+  .sidebar h1 {
+    display: none;
+  }
+
+  .sidebar a, .sidebar .dropdown-title {
+    margin: 0 0.3rem;
+  }
+
+  .dropdown-content {
+    position: static;
+    margin-left: 0;
+  }
+
+  .widgets-container {
+    grid-template-columns: 1fr;
+  }
+
+  .main-content {
+    padding: 1rem;
+  }
+}

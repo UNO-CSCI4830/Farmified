@@ -1,0 +1,196 @@
+/* src/styles/SignupApp.css */
+
+/* Global reset */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+}
+
+/* Container */
+.signup-container {
+  max-width: 600px;
+  margin: 50px auto;
+  background: #fff;
+  padding: 30px;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+/* Title */
+.signup-container h1 {
+  text-align: center;
+  color: #2e7d32;
+  margin-bottom: 25px;
+}
+
+/* Mode toggle */
+.mode-toggle {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  margin-bottom: 20px;
+}
+
+.mode-toggle button {
+  padding: 10px 25px;
+  border: 2px solid #2e7d32;
+  border-radius: 6px;
+  background: white;
+  color: #2e7d32;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.mode-toggle button.active {
+  background: #2e7d32;
+  color: white;
+}
+
+/* User type selection */
+.user-type-selection {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  margin-bottom: 20px;
+}
+
+.user-type-selection button {
+  padding: 8px 20px;
+  border: 1px solid #2e7d32;
+  border-radius: 6px;
+  background: white;
+  color: #2e7d32;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.user-type-selection button.active {
+  background: #2e7d32;
+  color: white;
+}
+
+/* Form styling */
+.signup-form, .login-form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+input, textarea {
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 16px;
+  width: 100%;
+}
+
+input:focus, textarea:focus {
+  outline: none;
+  border-color: #2e7d32;
+  box-shadow: 0 0 5px rgba(46,125,50,0.2);
+}
+
+/* Checkbox grids */
+.checkbox-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: 10px;
+  margin-top: 5px;
+}
+
+.checkbox-label {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 14px;
+}
+
+.checkbox-label input {
+  width: auto;
+}
+
+/* Buttons */
+button[type="submit"] {
+  background: #2e7d32;
+  color: white;
+  padding: 12px;
+  border: none;
+  border-radius: 6px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+button[type="submit"]:hover:not(:disabled) {
+  background: #1b4d23;
+}
+
+button[type="submit"]:disabled {
+  background: #cccccc;
+  cursor: not-allowed;
+}
+
+/* Error messages */
+.error-message {
+  color: #d32f2f;
+  font-size: 14px;
+  margin-top: 4px;
+}
+
+/* Success page */
+.success-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 60vh;
+}
+
+.success-card {
+  background: white;
+  padding: 30px;
+  border-radius: 8px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+  text-align: center;
+  max-width: 450px;
+  width: 100%;
+}
+
+.success-card h1 {
+  color: #2e7d32;
+  margin-bottom: 15px;
+}
+
+.success-card p {
+  color: #555;
+  font-size: 15px;
+  margin-bottom: 10px;
+}
+
+.okay-btn {
+  padding: 10px 35px;
+  background: #2e7d32;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.okay-btn:hover {
+  background: #1b4d23;
+}
+
+/* Responsive */
+@media(max-width: 600px){
+  .signup-container {
+    margin: 30px 10px;
+    padding: 20px;
+  }
+  .checkbox-grid {
+    grid-template-columns: 1fr;
+  }
+}

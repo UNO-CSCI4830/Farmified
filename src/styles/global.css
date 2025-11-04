@@ -1,0 +1,26 @@
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  margin: 0;
+  background-color: #f0f2f5;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+.container {
+  padding: 2rem;
+}
+
+/* Scrollbar for sidebar */
+.sidebar {
+  overflow-y: auto;
+}
+
+/* Hover effects for links */
+.sidebar a:hover {
+  background-color: #1b4d23;
+  border-radius: 4px;
+  padding-left: 0.5rem;
+}

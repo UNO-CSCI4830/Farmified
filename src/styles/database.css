@@ -1,0 +1,56 @@
+/* ============================
+   Database Page Styles
+============================ */
+
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f9fafb;
+  color: #333;
+  margin: 0;
+  padding: 2rem;
+}
+
+h1 {
+  color: #2e7d32;
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+
+.database-container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.database-table {
+  width: 90%;
+  border-collapse: collapse;
+  background-color: #fff;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.database-table th, .database-table td {
+  padding: 10px 14px;
+  border: 1px solid #ddd;
+  text-align: left;
+}
+
+.database-table th {
+  background-color: #f0f0f0;
+  color: #2e7d32;
+  font-weight: bold;
+}
+
+.database-table tr:hover {
+  background-color: #f9f9f9;
+}
+
+@media (max-width: 768px) {
+  .database-table {
+    width: 100%;
+    font-size: 0.9rem;
+  }
+}
