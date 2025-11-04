@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Midwest Crop & Animal Prices</title>
+  <style>
+    /* --- Ribbon (Top Navigation Bar) --- */
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background-color: #2d6a4f;
+      color: white;
+      padding: 12px 24px;
+      font-family: Arial, sans-serif;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      z-index: 1000;
+    }
+    .navbar a {
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+      transition: color 0.2s;
+    }
+    .navbar a:hover {
+      color: #b7e4c7;
+    }
+
+    /* --- Page Body --- */
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding-top: 70px; /* space for fixed navbar */
+      background: #fafafa;
+      color: #333;
+    }
+    h1 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    /* --- Table Styles --- */
+    table {
+      border-collapse: collapse;
+      width: 90%;
+      margin: 0 auto;
+      background: #fff;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+    th, td {
+      padding: 10px 14px;
+      border: 1px solid #ddd;
+      text-align: left;
+    }
+    th {
+      background-color: #f0f0f0;
+    }
+    tr:hover {
+      background-color: #f9f9f9;
+    }
+    #loading {
+      text-align: center;
+      margin-top: 20px;
+      color: #777;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- 🌿 Top Ribbon -->
+  <div class="navbar">
+    <a href="#">Home</a>
+    <a href="#">Sign In / Sign Up</a>
+  </div>
+
+  <!-- 🌽 Page Content -->
+  <h1>Midwest Crop & Animal Product Prices</h1>
+  <div id="loading">Loading CSV data...</div>
+  <table id="dataTable" style="display:none;">
+    <thead></thead>
+    <tbody></tbody>
+  </table>
+
+  <script>
+    // ✅ Correct GitHub Raw CSV URL
+    const csvUrl = "https://raw.githubusercontent.com/UNO-CSCI4830/Farmified/refs/heads/main/midwest_crop_animal_prices.csv";
+
+    async function loadCSV() {
+      try {
+        const response = await fetch(csvUrl);
+        if (!response.ok) throw new Error("Failed to fetch CSV file.");
+        const csvText = await response.text();
+
+        const rows = csvText.trim().split("\n").map(row => row.split(","));
+        const table = document.getElementById("dataTable");
+        const thead = table.querySelector("thead");
+        const tbody = table.querySelector("tbody");
+
+        thead.innerHTML = "";
+        tbody.innerHTML = "";
+
+        // Create header row
+        const headerRow = document.createElement("tr");
+        rows[0].forEach(header => {
+          const th = document.createElement("th");
+          th.textContent = header;
+          headerRow.appendChild(th);
+        });
+        thead.appendChild(headerRow);
+
+        // Create data rows
+        rows.slice(1).forEach(row => {
+          const tr = document.createElement("tr");
+          row.forEach(cell => {
+            const td = document.createElement("td");
+            td.textContent = cell;
+            tr.appendChild(td);
+          });
+          tbody.appendChild(tr);
+        });
+
+        document.getElementById("loading").style.display = "none";
+        table.style.display = "table";
+      } catch (error) {
+        document.getElementById("loading").textContent = "Error loading CSV.";
+        console.error(error);
+      }
+    }
+
+    loadCSV();
+  </script>
+</body>
+</html>
