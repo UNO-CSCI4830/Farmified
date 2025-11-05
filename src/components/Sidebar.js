@@ -11,6 +11,8 @@ function Sidebar() {
 
         <Link to="/">Home</Link>
 
+        <Link to="/messages">Messages</Link>
+
         {/* Database Dropdown */}
         <div
           className="dropdown"

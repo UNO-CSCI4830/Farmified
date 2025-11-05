@@ -1,14 +1,37 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
+import "../styles/home.css";
 
 function Home() {
+  const navigate = useNavigate();
   const widgets = [
-    { title: "Database", info: "Entries: 124", btn: "View" },
-    { title: "Messages", info: "Unread: 5", btn: "Check" }
+    { title: "Database", info: "Entries: 124", btn: "View", path: "/database" },
+    { title: "Messages", info: "Unread: 5", btn: "Check", path: "/messages" }
   ];
 
   return (
     <div style={{ padding: "2rem", flexGrow: 1 }}>
-      <h2 style={{ color: "#2e7d32" }}>Farmified</h2>
+      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "1rem" }}>
+        <h2 style={{ color: "#2e7d32", margin: 0 }}>Farmified</h2>
+        <button 
+          onClick={() => navigate("/signup")}
+          style={{
+            backgroundColor: "#2e7d32",
+            color: "white",
+            padding: "0.7rem 1.5rem",
+            border: "none",
+            borderRadius: "6px",
+            cursor: "pointer",
+            fontSize: "1rem",
+            fontWeight: "bold",
+            transition: "background-color 0.2s"
+          }}
+          onMouseEnter={(e) => e.currentTarget.style.backgroundColor = "#1b4d23"}
+          onMouseLeave={(e) => e.currentTarget.style.backgroundColor = "#2e7d32"}
+        >
+          Sign Up / Login
+        </button>
+      </div>
 
       <div style={{
         display: "grid",
@@ -43,7 +66,7 @@ function Home() {
               borderRadius: "6px",
               cursor: "pointer"
             }}
-            onClick={() => alert(`${w.btn} clicked`)}>
+            onClick={() => navigate(w.path)}>
               {w.btn}
             </button>
           </div>

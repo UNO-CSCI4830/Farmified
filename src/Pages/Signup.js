@@ -21,7 +21,7 @@ function Signup() {
     preferences: [],
     deliveryAddress: ''
   });
-  const [passwordErrors, setPasswordErrors] = useState([]);
+  const [passwordErrors, setPasswordErrors] = useState(['At least 8 characters', 'One uppercase letter', 'One number', 'One special character']);
   const [loginError, setLoginError] = useState('');
 
   const nebraskaProduce = [
@@ -144,7 +144,22 @@ function Signup() {
             <input name="phone" placeholder="Phone Number" value={formData.phone} onChange={handleInputChange} required />
             <input name="location" placeholder="Location" value={formData.location} onChange={handleInputChange} required />
 
-            <input name="password" type="password" placeholder="Password" value={formData.password} onChange={handleInputChange} required />
+            <div>
+              <input name="password" type="password" placeholder="Password" value={formData.password} onChange={handleInputChange} required />
+              <div className="password-requirements">
+                <p>Password Requirements:</p>
+                <ul>
+                  {['At least 8 characters', 'One uppercase letter', 'One number', 'One special character'].map((req) => {
+                    const isMet = !passwordErrors.includes(req);
+                    return (
+                      <li key={req} className={isMet ? 'met' : ''}>
+                        {req}
+                      </li>
+                    );
+                  })}
+                </ul>
+              </div>
+            </div>
             <input name="confirmPassword" type="password" placeholder="Confirm Password" value={formData.confirmPassword} onChange={handleInputChange} required />
 
             {userType==='farmer' && <>
