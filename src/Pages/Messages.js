@@ -51,7 +51,7 @@ export default function MessageScreen() {
 
   return (
     <div className="message-screen">
-      <aside className="sidebar">
+      <aside className="sidebar2">
         <div className="sidebar-header">Messages</div>
         <div className="conversation-list">
           {conversations.map((c) => (
