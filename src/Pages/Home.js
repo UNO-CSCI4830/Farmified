@@ -1,9 +1,45 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import "../styles/home.css";
 
 function Home() {
   const navigate = useNavigate();
+  const [currentUser, setCurrentUser] = useState(null);
+
+  useEffect(() => {
+    // Function to update user state
+    const updateUser = () => {
+      const userStr = localStorage.getItem('currentUser');
+      if (userStr) {
+        try {
+          setCurrentUser(JSON.parse(userStr));
+        } catch (error) {
+          console.error('Error parsing user data:', error);
+          localStorage.removeItem('currentUser');
+          setCurrentUser(null);
+        }
+      } else {
+        setCurrentUser(null);
+      }
+    };
+
+    // Check if user is logged in on mount
+    updateUser();
+
+    // Listen for storage changes (when user logs in from another tab/window)
+    window.addEventListener('storage', updateUser);
+
+    // Also listen for custom events (when user logs in/out on same tab)
+    window.addEventListener('userLoggedIn', updateUser);
+    window.addEventListener('userLoggedOut', updateUser);
+
+    return () => {
+      window.removeEventListener('storage', updateUser);
+      window.removeEventListener('userLoggedIn', updateUser);
+      window.removeEventListener('userLoggedOut', updateUser);
+    };
+  }, []);
+
   const widgets = [
     { title: "Database", info: "Entries: 124", btn: "View", path: "/database" },
     { title: "Messages", info: "Unread: 5", btn: "Check", path: "/messages" }
@@ -13,24 +49,32 @@ function Home() {
     <div style={{ padding: "2rem", flexGrow: 1 }}>
       <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "1rem" }}>
         <h2 style={{ color: "#2e7d32", margin: 0 }}>Farmified</h2>
-        <button 
-          onClick={() => navigate("/signup")}
-          style={{
-            backgroundColor: "#2e7d32",
-            color: "white",
-            padding: "0.7rem 1.5rem",
-            border: "none",
-            borderRadius: "6px",
-            cursor: "pointer",
-            fontSize: "1rem",
-            fontWeight: "bold",
-            transition: "background-color 0.2s"
-          }}
-          onMouseEnter={(e) => e.currentTarget.style.backgroundColor = "#1b4d23"}
-          onMouseLeave={(e) => e.currentTarget.style.backgroundColor = "#2e7d32"}
-        >
-          Sign Up / Login
-        </button>
+        {currentUser ? (
+          <div style={{ display: "flex", alignItems: "center", gap: "1rem" }}>
+            <span style={{ color: "#2e7d32", fontSize: "1.1rem", fontWeight: "500" }}>
+              Hello {currentUser.firstName} {currentUser.lastName}
+            </span>
+          </div>
+        ) : (
+          <button 
+            onClick={() => navigate("/signup")}
+            style={{
+              backgroundColor: "#2e7d32",
+              color: "white",
+              padding: "0.7rem 1.5rem",
+              border: "none",
+              borderRadius: "6px",
+              cursor: "pointer",
+              fontSize: "1rem",
+              fontWeight: "bold",
+              transition: "background-color 0.2s"
+            }}
+            onMouseEnter={(e) => e.currentTarget.style.backgroundColor = "#1b4d23"}
+            onMouseLeave={(e) => e.currentTarget.style.backgroundColor = "#2e7d32"}
+          >
+            Sign Up / Login
+          </button>
+        )}
       </div>
 
       <div style={{

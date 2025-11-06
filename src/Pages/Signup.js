@@ -1,6 +1,7 @@
 // src/Pages/Signup.js
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { signup as signupAPI, login as loginAPI } from '../utils/api';
 import '../styles/Signup.css'; // optional, create for styling
 
 function Signup() {
@@ -23,6 +24,8 @@ function Signup() {
   });
   const [passwordErrors, setPasswordErrors] = useState(['At least 8 characters', 'One uppercase letter', 'One number', 'One special character']);
   const [loginError, setLoginError] = useState('');
+  const [signupError, setSignupError] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
 
   const nebraskaProduce = [
     'Corn','Soybeans','Wheat','Alfalfa','Dry Beans','Potatoes',
@@ -59,65 +62,90 @@ function Signup() {
     });
   };
 
-  const checkExistingUser = (email, phone) => {
-    const profiles = JSON.parse(localStorage.getItem('farmified_profiles')) || [];
-    if (profiles.find(p => p.email === email)) return 'email';
-    if (profiles.find(p => p.phone === phone)) return 'phone';
-    return null;
-  };
-
-  const saveProfile = (profile) => {
-    const profiles = JSON.parse(localStorage.getItem('farmified_profiles')) || [];
-    profiles.push(profile);
-    localStorage.setItem('farmified_profiles', JSON.stringify(profiles));
-    localStorage.setItem('currentUser', JSON.stringify(profile));
-  };
-
-  const handleSignup = (e) => {
+  const handleSignup = async (e) => {
     e.preventDefault();
-    if (!userType) return alert('Please select Farmer or Consumer');
-    if (formData.password !== formData.confirmPassword) return alert("Passwords don't match");
+    setSignupError('');
+    
+    if (!userType) {
+      setSignupError('Please select Farmer or Consumer');
+      return;
+    }
+    if (formData.password !== formData.confirmPassword) {
+      setSignupError("Passwords don't match");
+      return;
+    }
     const pwErrors = validatePassword(formData.password);
-    if (pwErrors.length) return alert('Password does not meet requirements');
-    if (userType === 'farmer' && formData.crops.length === 0) return alert('Select at least one crop');
-    if (userType === 'consumer' && formData.preferences.length === 0) return alert('Select at least one preference');
+    if (pwErrors.length) {
+      setSignupError('Password does not meet requirements');
+      return;
+    }
+    if (userType === 'farmer' && formData.crops.length === 0) {
+      setSignupError('Select at least one crop');
+      return;
+    }
+    if (userType === 'consumer' && formData.preferences.length === 0) {
+      setSignupError('Select at least one preference');
+      return;
+    }
 
-    const existing = checkExistingUser(formData.email, formData.phone);
-    if (existing === 'email') return alert('Email already registered');
-    if (existing === 'phone') return alert('Phone already registered');
+    setIsLoading(true);
+    try {
+      const userData = {
+        firstName: formData.firstName,
+        lastName: formData.lastName,
+        email: formData.email,
+        phone: formData.phone,
+        location: formData.location,
+        password: formData.password,
+        userType,
+        ...(userType === 'farmer' && {
+          farmName: formData.farmName,
+          crops: formData.crops,
+          farmSize: formData.farmSize
+        }),
+        ...(userType === 'consumer' && {
+          preferences: formData.preferences,
+          deliveryAddress: formData.deliveryAddress
+        })
+      };
 
-    const profile = {
-      firstName: formData.firstName,
-      lastName: formData.lastName,
-      email: formData.email,
-      phone: formData.phone,
-      location: formData.location,
-      userType,
-      ...(userType === 'farmer' && {
-        farmName: formData.farmName,
-        crops: formData.crops.join(', '),
-        farmSize: formData.farmSize
-      }),
-      ...(userType === 'consumer' && {
-        preferences: formData.preferences.join(', '),
-        deliveryAddress: formData.deliveryAddress
-      }),
-      password: formData.password
-    };
-
-    saveProfile(profile);
-    navigate('/'); // redirect to Home
+      const response = await signupAPI(userData);
+      
+      // Store user in localStorage for frontend state management
+      localStorage.setItem('currentUser', JSON.stringify(response.user));
+      
+      // Dispatch custom event to notify other components
+      window.dispatchEvent(new Event('userLoggedIn'));
+      
+      // Redirect to home
+      navigate('/');
+    } catch (error) {
+      setSignupError(error.message || 'Signup failed. Please try again.');
+    } finally {
+      setIsLoading(false);
+    }
   };
 
-  const handleLogin = (e) => {
+  const handleLogin = async (e) => {
     e.preventDefault();
-    const profiles = JSON.parse(localStorage.getItem('farmified_profiles')) || [];
-    const user = profiles.find(p => p.email === formData.email && p.password === formData.password);
-    if (user) {
-      localStorage.setItem('currentUser', JSON.stringify(user));
-      navigate('/'); // redirect to Home
-    } else {
-      setLoginError('Invalid email or password');
+    setLoginError('');
+    setIsLoading(true);
+
+    try {
+      const response = await loginAPI(formData.email, formData.password);
+      
+      // Store user in localStorage for frontend state management
+      localStorage.setItem('currentUser', JSON.stringify(response.user));
+      
+      // Dispatch custom event to notify other components
+      window.dispatchEvent(new Event('userLoggedIn'));
+      
+      // Redirect to home
+      navigate('/');
+    } catch (error) {
+      setLoginError(error.message || 'Invalid email or password');
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -183,7 +211,10 @@ function Signup() {
               <textarea name="deliveryAddress" placeholder="Delivery Address" value={formData.deliveryAddress} onChange={handleInputChange} required />
             </>}
 
-            <button type="submit">Sign Up</button>
+            <button type="submit" disabled={isLoading}>
+              {isLoading ? 'Signing Up...' : 'Sign Up'}
+            </button>
+            {signupError && <p className="error-message">{signupError}</p>}
           </form>
         )}
       </>}
@@ -192,7 +223,9 @@ function Signup() {
         <form onSubmit={handleLogin} className="login-form">
           <input name="email" type="email" placeholder="Email" value={formData.email} onChange={handleInputChange} required />
           <input name="password" type="password" placeholder="Password" value={formData.password} onChange={handleInputChange} required />
-          <button type="submit">Login</button>
+          <button type="submit" disabled={isLoading}>
+            {isLoading ? 'Logging In...' : 'Login'}
+          </button>
           {loginError && <p className="error-message">{loginError}</p>}
         </form>
       )}

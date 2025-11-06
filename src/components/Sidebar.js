@@ -1,8 +1,52 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { Link, useNavigate } from "react-router-dom";
 
 function Sidebar() {
   const [hoverDropdown, setHoverDropdown] = useState(null);
+  const [currentUser, setCurrentUser] = useState(null);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    // Function to update user state
+    const updateUser = () => {
+      const userStr = localStorage.getItem('currentUser');
+      if (userStr) {
+        try {
+          setCurrentUser(JSON.parse(userStr));
+        } catch (error) {
+          console.error('Error parsing user data:', error);
+          localStorage.removeItem('currentUser');
+          setCurrentUser(null);
+        }
+      } else {
+        setCurrentUser(null);
+      }
+    };
+
+    // Check if user is logged in on mount
+    updateUser();
+
+    // Listen for storage changes (when user logs in from another tab/window)
+    window.addEventListener('storage', updateUser);
+
+    // Also listen for custom events (when user logs in/out on same tab)
+    window.addEventListener('userLoggedIn', updateUser);
+    window.addEventListener('userLoggedOut', updateUser);
+
+    return () => {
+      window.removeEventListener('storage', updateUser);
+      window.removeEventListener('userLoggedIn', updateUser);
+      window.removeEventListener('userLoggedOut', updateUser);
+    };
+  }, []);
+
+  const handleSignOut = () => {
+    localStorage.removeItem('currentUser');
+    setCurrentUser(null);
+    // Dispatch custom event to notify other components
+    window.dispatchEvent(new Event('userLoggedOut'));
+    navigate('/signup');
+  };
 
   return (
     <div className="sidebar">
@@ -63,9 +107,11 @@ function Sidebar() {
         <Link to="/about">About</Link>
       </div>
 
-      <div className="sign-out">
-        <button onClick={() => alert("Signing out...")}>Sign Out</button>
-      </div>
+      {currentUser && (
+        <div className="sign-out">
+          <button onClick={handleSignOut}>Sign Out</button>
+        </div>
+      )}
     </div>
   );
 }
