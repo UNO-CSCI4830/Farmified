@@ -73,7 +73,8 @@ function Sidebar() {
           )}
         </div>
 
-        {/* Connect Dropdown */}
+        {/* Connect Dropdown 
+        
         <div
           className="dropdown"
           onMouseEnter={() => setHoverDropdown("connect")}
@@ -86,7 +87,9 @@ function Sidebar() {
               <Link to="/connect/profiles">Message Screen Profiles</Link>
             </div>
           )}
-        </div>
+        </div>*/}
+        
+
 
         {/* Profile Dropdown */}
         <div
