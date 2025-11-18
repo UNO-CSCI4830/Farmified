@@ -76,3 +76,28 @@ export const getUser = async (userId) => {
   }
 };
 
+export const forgotPassword = async (email) => {
+  try {
+    const response = await fetch(`${API_BASE_URL}/forgot-password`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ email }),
+    });
+
+    if (!response.ok) {
+      const errorData = await response.json().catch(() => ({ error: 'Failed to process request' }));
+      throw new Error(errorData.error || `Request failed: ${response.status} ${response.statusText}`);
+    }
+
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    if (error.message.includes('Failed to fetch') || error.message.includes('NetworkError')) {
+      throw new Error('Cannot connect to server. Make sure the backend is running on http://localhost:5001');
+    }
+    throw error;
+  }
+};
+

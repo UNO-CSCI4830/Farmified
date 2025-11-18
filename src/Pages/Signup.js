@@ -1,12 +1,12 @@
 // src/Pages/Signup.js
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { signup as signupAPI, login as loginAPI } from '../utils/api';
+import { signup as signupAPI, login as loginAPI, forgotPassword as forgotPasswordAPI } from '../utils/api';
 import '../styles/Signup.css'; // optional, create for styling
 
 function Signup() {
   const navigate = useNavigate();
-  const [mode, setMode] = useState('signup'); // 'signup' or 'login'
+  const [mode, setMode] = useState('signup'); // 'signup' or 'login' or 'forgotPassword' or 'passwordSent'
   const [userType, setUserType] = useState('');
   const [formData, setFormData] = useState({
     firstName: '',
@@ -20,11 +20,13 @@ function Signup() {
     crops: [],
     farmSize: '',
     preferences: [],
-    deliveryAddress: ''
+    deliveryAddress: '',
+    forgotPasswordEmail: ''
   });
   const [passwordErrors, setPasswordErrors] = useState(['At least 8 characters', 'One uppercase letter', 'One number', 'One special character']);
   const [loginError, setLoginError] = useState('');
   const [signupError, setSignupError] = useState('');
+  const [forgotPasswordError, setForgotPasswordError] = useState('');
   const [isLoading, setIsLoading] = useState(false);
 
   const nebraskaProduce = [
@@ -149,6 +151,21 @@ function Signup() {
     }
   };
 
+  const handleForgotPassword = async (e) => {
+    e.preventDefault();
+    setForgotPasswordError('');
+    setIsLoading(true);
+
+    try {
+      await forgotPasswordAPI(formData.forgotPasswordEmail);
+      setMode('passwordSent');
+    } catch (error) {
+      setForgotPasswordError(error.message || 'Failed to send password. Please try again.');
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
   return (
     <div className="signup-container">
       <h1>Farmified</h1>
@@ -220,14 +237,93 @@ function Signup() {
       </>}
 
       {mode === 'login' && (
-        <form onSubmit={handleLogin} className="login-form">
-          <input name="email" type="email" placeholder="Email" value={formData.email} onChange={handleInputChange} required />
-          <input name="password" type="password" placeholder="Password" value={formData.password} onChange={handleInputChange} required />
+        <>
+          <form onSubmit={handleLogin} className="login-form">
+            <input name="email" type="email" placeholder="Email" value={formData.email} onChange={handleInputChange} required />
+            <input name="password" type="password" placeholder="Password" value={formData.password} onChange={handleInputChange} required />
+            <button type="submit" disabled={isLoading}>
+              {isLoading ? 'Logging In...' : 'Login'}
+            </button>
+            {loginError && <p className="error-message">{loginError}</p>}
+          </form>
+          <div style={{ textAlign: 'center', marginTop: '15px' }}>
+            <button 
+              type="button" 
+              onClick={() => setMode('forgotPassword')}
+              style={{
+                background: 'transparent',
+                border: 'none',
+                color: '#2e7d32',
+                cursor: 'pointer',
+                textDecoration: 'underline',
+                fontSize: '14px',
+                padding: '5px'
+              }}
+            >
+              Forgot Password?
+            </button>
+          </div>
+        </>
+      )}
+
+      {mode === 'forgotPassword' && (
+        <form onSubmit={handleForgotPassword} className="login-form">
+          <p style={{ textAlign: 'center', marginBottom: '20px', color: '#666' }}>
+            Enter your email address and we'll send you your password.
+          </p>
+          <input 
+            name="forgotPasswordEmail" 
+            type="email" 
+            placeholder="Email" 
+            value={formData.forgotPasswordEmail} 
+            onChange={handleInputChange} 
+            required 
+          />
           <button type="submit" disabled={isLoading}>
-            {isLoading ? 'Logging In...' : 'Login'}
+            {isLoading ? 'Sending...' : 'Send Password'}
           </button>
-          {loginError && <p className="error-message">{loginError}</p>}
+          {forgotPasswordError && <p className="error-message">{forgotPasswordError}</p>}
+          <div style={{ textAlign: 'center', marginTop: '15px' }}>
+            <button 
+              type="button" 
+              onClick={() => setMode('login')}
+              style={{
+                background: 'transparent',
+                border: 'none',
+                color: '#2e7d32',
+                cursor: 'pointer',
+                textDecoration: 'underline',
+                fontSize: '14px',
+                padding: '5px'
+              }}
+            >
+              Back to Login
+            </button>
+          </div>
         </form>
+      )}
+
+      {mode === 'passwordSent' && (
+        <div className="success-container">
+          <div className="success-card">
+            <h1>Password Sent!</h1>
+            <p style={{ marginBottom: '20px' }}>
+              Your password has been successfully sent to your email address.
+            </p>
+            <p style={{ marginBottom: '30px', color: '#666' }}>
+              Please use that password to sign in.
+            </p>
+            <button 
+              className="okay-btn"
+              onClick={() => {
+                setMode('login');
+                setFormData(prev => ({ ...prev, forgotPasswordEmail: '' }));
+              }}
+            >
+              Back to Login
+            </button>
+          </div>
+        </div>
       )}
     </div>
   );
