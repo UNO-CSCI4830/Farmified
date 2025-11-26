@@ -17,7 +17,7 @@ beforeEach(() => {
 });
 
 // TEST #1: Renders page title
-test("renders Farmified header", () => {
+test("TEST1 renders Farmified header", () => {
   render(
     <MemoryRouter>
       <Home />
@@ -28,7 +28,7 @@ test("renders Farmified header", () => {
 });
 
 // TEST #2: Shows Sign Up/Login button when no user in localStorage
-test("shows Sign Up/Login button when user is not logged in", () => {
+test("TEST2 shows Sign Up/Login button when user is not logged in", () => {
   render(
     <MemoryRouter>
       <Home />
@@ -39,7 +39,7 @@ test("shows Sign Up/Login button when user is not logged in", () => {
 });
 
 // TEST #3: Shows user greeting when user IS logged in
-test("shows greeting when user exists in localStorage", () => {
+test("TEST3 shows greeting when user exists in localStorage", () => {
   localStorage.setItem(
     "currentUser",
     JSON.stringify({ firstName: "Eric", lastName: "Gonzalez" })
@@ -55,7 +55,7 @@ test("shows greeting when user exists in localStorage", () => {
 });
 
 // TEST #4: Navigate to signup page when Sign Up/Login clicked
-test("navigates to /signup when Sign Up/Login button clicked", () => {
+test("TEST4 navigates to /signup when Sign Up/Login button clicked", () => {
   render(
     <MemoryRouter>
       <Home />

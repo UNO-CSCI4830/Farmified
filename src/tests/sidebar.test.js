@@ -17,7 +17,7 @@ beforeEach(() => {
 
 
 // TEST #1: Renders basic static links
-test("renders main navigation links", () => {
+test("TEST1 renders main navigation links", () => {
   render(
     <MemoryRouter>
       <Sidebar />
@@ -32,7 +32,7 @@ test("renders main navigation links", () => {
 
 
 // TEST #2: Shows dropdown on hover
-test("shows Database dropdown when hovered", () => {
+test("TEST2 shows Database dropdown when hovered", () => {
   render(
     <MemoryRouter>
       <Sidebar />
@@ -56,7 +56,7 @@ test("shows Database dropdown when hovered", () => {
 
 
 // TEST #3: Shows Sign Out button when user logged in
-test("displays Sign Out button only when user exists", () => {
+test("TEST3 displays Sign Out button only when user exists", () => {
   localStorage.setItem(
     "currentUser",
     JSON.stringify({ firstName: "Eric", lastName: "Gonzalez" })
@@ -73,7 +73,7 @@ test("displays Sign Out button only when user exists", () => {
 
 
 // TEST #4: Clicking Sign Out clears userdata and navigates to /signup
-test("sign out clears localStorage and navigates to signup", () => {
+test("TEST4 sign out clears localStorage and navigates to signup", () => {
   localStorage.setItem(
     "currentUser",
     JSON.stringify({ firstName: "Eric", lastName: "Gonzalez" })
