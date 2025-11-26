@@ -1,1 +1,4 @@
-Make a branch and place all of your test files into this folder. After the assignment, we will merge all of these into the main branch.
+Dear Professor/TA,
+I have worked on 2 pges, Signup page and Forgot Password Page. There are 4 tests for each page under the folders SignupTests and ForgotPasswordTest.
+Thank You,
+Rajas Bhope 
