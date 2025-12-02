@@ -419,3 +419,28 @@ process.on('SIGINT', () => {
   });
 });
 
+// Update user made By Eric 12/1
+app.put('/api/user/:id', (req, res) => {
+  const { id } = req.params;
+  const updates = req.body;
+
+  // Convert arrays to strings if needed
+  if (updates.crops && Array.isArray(updates.crops)) updates.crops = updates.crops.join(', ');
+  if (updates.preferences && Array.isArray(updates.preferences)) updates.preferences = updates.preferences.join(', ');
+
+  const fields = Object.keys(updates);
+  const values = Object.values(updates);
+
+  const setString = fields.map(f => `${f} = ?`).join(', ');
+
+  db.run(`UPDATE users SET ${setString} WHERE id = ?`, [...values, id], function(err) {
+    if (err) {
+      return res.status(500).json({ error: 'Failed to update user' });
+    }
+    db.get('SELECT id, firstName, lastName, email, phone, location, userType, farmName, crops, farmSize, preferences, deliveryAddress FROM users WHERE id = ?', [id], (err, user) => {
+      if (err) return res.status(500).json({ error: 'Failed to fetch updated user' });
+      res.json({ user });
+    });
+  });
+});
+

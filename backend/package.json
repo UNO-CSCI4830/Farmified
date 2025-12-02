@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "Backend server for Farmified application",
   "main": "server.js",
+  "proxy": "http://localhost:5001",
   "scripts": {
     "start": "node server.js",
     "dev": "nodemon server.js"

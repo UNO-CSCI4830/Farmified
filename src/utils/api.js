@@ -101,3 +101,17 @@ export const forgotPassword = async (email) => {
   }
 };
 
+// src/utils/api.js added by Eric 12/1
+export const updateUser = async (id, data) => {
+  const res = await fetch(`http://localhost:5001/api/user/${id}`, {
+    method: 'PUT',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(data),
+  });
+  if (!res.ok) {
+    const errorData = await res.json();
+    throw new Error(errorData.error || 'Failed to update user');
+  }
+  return res.json();
+};
+

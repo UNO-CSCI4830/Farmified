@@ -1,0 +1,100 @@
+.profile-container {
+  max-width: 900px;
+  margin: 40px auto;
+  padding: 35px;
+  background-color: #fff;
+  border-radius: 20px;
+  box-shadow: 0 8px 22px rgba(0,0,0,0.12);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 1.1rem; /* base font bigger */
+}
+
+.profile-header {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.profile-header h2 {
+  margin: 0;
+  font-size: 2.5rem; /* bigger name */
+}
+
+.user-type-tag {
+  display: inline-block;
+  margin-top: 8px;
+  padding: 8px 20px; /* bigger pill */
+  background-color: #4CAF50;
+  color: white;
+  border-radius: 25px;
+  font-size: 1.1rem;
+  text-transform: capitalize;
+}
+
+.profile-columns {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px; /* more spacing between columns */
+  margin-bottom: 40px;
+}
+
+.profile-section {
+  background-color: #f9f9f9;
+  padding: 30px;
+  border-radius: 15px;
+}
+
+.profile-section h3 {
+  margin-top: 0;
+  margin-bottom: 20px;
+  color: #333;
+  font-size: 1.5rem;
+}
+
+.profile-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 18px;
+}
+
+.profile-row label {
+  font-weight: 600;
+  color: #555;
+  font-size: 1.1rem;
+}
+
+.profile-row span,
+.profile-row input,
+.profile-row textarea {
+  flex: 1;
+  margin-left: 15px;
+  font-size: 1.1rem;
+}
+
+.profile-row input,
+.profile-row textarea {
+  padding: 10px 15px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  width: 100%;
+}
+
+.profile-actions {
+  text-align: center;
+  margin-top: 30px;
+}
+
+.profile-actions button {
+  margin: 0 15px;
+  padding: 14px 28px;
+  border: none;
+  border-radius: 10px;
+  background-color: #4CAF50;
+  color: white;
+  font-size: 1.2rem;
+  cursor: pointer;
+}
+
+.profile-actions button:hover {
+  background-color: #45a049;
+}

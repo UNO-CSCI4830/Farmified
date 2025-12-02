@@ -90,22 +90,8 @@ function Sidebar() {
         </div>*/}
         
 
+      <Link to="/profile">Profile</Link>
 
-        {/* Profile Dropdown */}
-        <div
-          className="dropdown"
-          onMouseEnter={() => setHoverDropdown("profile")}
-          onMouseLeave={() => setHoverDropdown(null)}
-        >
-          <div className="dropdown-title">Profile</div>
-          {hoverDropdown === "profile" && (
-            <div className="dropdown-content">
-              <Link to="/profile/edit">Edit</Link>
-              <Link to="/profile/view">View</Link>
-              <Link to="/profile/notifications">Notifications</Link>
-            </div>
-          )}
-        </div>
 
         <Link to="/about">About</Link>
       </div>
