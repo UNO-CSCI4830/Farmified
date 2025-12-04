@@ -1,0 +1,13 @@
+[
+  { "Crop": "Corn", "Unit": "bushel", "Approx price": "$4.70", "Retail price": "N/A" },
+  { "Crop": "Soybeans", "Unit": "bushel", "Approx price": "$12.80", "Retail price": "N/A" },
+  { "Crop": "Wheat", "Unit": "bushel", "Approx price": "$6.00", "Retail price": "N/A" },
+  { "Crop": "Oats", "Unit": "bushel", "Approx price": "$3.80", "Retail price": "N/A" },
+  { "Crop": "Barley", "Unit": "bushel", "Approx price": "$4.40", "Retail price": "N/A" },
+  { "Crop": "Hay", "Unit": "ton", "Approx price": "$190.00", "Retail price": "N/A" },
+  { "Crop": "Alfalfa", "Unit": "ton", "Approx price": "$220.00", "Retail price": "N/A" },
+  { "Crop": "Potatoes", "Unit": "cwt", "Approx price": "$12.00", "Retail price": "$18.00" },
+  { "Crop": "Eggs", "Unit": "dozen", "Approx price": "$1.90", "Retail price": "$3.50" },
+  { "Crop": "Milk", "Unit": "gallon", "Approx price": "$1.60", "Retail price": "$3.90" },
+  { "Crop": "Honey", "Unit": "pound", "Approx price": "$3.50", "Retail price": "$7.00" }
+]
