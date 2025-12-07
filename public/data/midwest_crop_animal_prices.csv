@@ -1,16 +1,16 @@
-Crop / Product,Unit,Approx Price (Farm / Wholesale),Retail Price (Consumer Avg.)
-Corn,per bushel,$4.20 – $4.50,N/A
-Soybeans,per bushel,$10.40 – $10.90,N/A
-Wheat,per bushel,$5.30 – $5.60,N/A
-Tomatoes (field-grown),per pound,$1.50 – $1.80,$1.96 / lb
-Lettuce (iceberg),per pound,$1.20 – $1.40,$1.73 / lb
-Potatoes (white),per pound,$0.60 – $0.80,$0.88 / lb
-Strawberries,per pound,$1.80 – $2.20,$2.50 – $2.65 / lb
-Beans (dry),per pound,$1.20 – $1.50,$1.63 / lb
-Beans (fresh),per pound,$3.50 – $5.00,$3.75 – $5.25 / lb
-Milk,per hundredweight (100 lb),$17.75 – $20.50 / cwt (≈ $0.18–$0.21 / lb),$4.20 – $4.60 / gal
-Eggs (Grade A Large),per dozen,$3.00 – $4.50,$4.95 / dozen
-Honey,per pound,$2.70 – $3.50,$7.00 – $8.50 / lb
-Beef (retail cuts),per pound,N/A,$8.90 / lb
-Pork (wholesale carcass / cutout),per pound,$1.02 / lb,"$4.60 / lb (pork chops, bone-in)"
-Chicken (whole),per pound,N/A,$2.06 / lb
+Crop / Product,Unit,Approx Price (Farm / Wholesale),Retail Price (Consumer Avg.),Category
+Corn,per bushel,$4.20 – $4.50,N/A,Grain
+Soybeans,per bushel,$10.40 – $10.90,N/A,Grain
+Wheat,per bushel,$5.30 – $5.60,N/A,Grain
+Tomatoes (field-grown),per pound,$1.50 – $1.80,$1.96 / lb,Veggie
+Lettuce (iceberg),per pound,$1.20 – $1.40,$1.73 / lb,Veggie
+Potatoes (white),per pound,$0.60 – $0.80,$0.88 / lb,Veggie
+Strawberries,per pound,$1.80 – $2.20,$2.50 – $2.65 / lb,Fruit
+Beans (dry),per pound,$1.20 – $1.50,$1.63 / lb,Grain
+Beans (fresh),per pound,$3.50 – $5.00,$3.75 – $5.25 / lb,Veggie
+Milk,per hundredweight (100 lb),$17.75 – $20.50 / cwt (≈ $0.18–$0.21 / lb),$4.20 – $4.60 / gal,Animal Product
+Eggs (Grade A Large),per dozen,$3.00 – $4.50,$4.95 / dozen,Animal Byproduct
+Honey,per pound,$2.70 – $3.50,$7.00 – $8.50 / lb,Animal Byproduct
+Beef (retail cuts),per pound,N/A,$8.90 / lb,Animal Product
+Pork (wholesale carcass / cutout),per pound,$1.02 / lb,$4.60 / lb,Animal Product
+Chicken (whole),per pound,N/A,$2.06 / lb,Animal Product
