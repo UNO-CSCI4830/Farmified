@@ -7,11 +7,11 @@ export default function About() {
 
       <h2>Our Mission</h2>
       <p>
-        Farmified’s mission is to modernize how farmers track, manage, and 
-        understand their operations by providing a simple, intuitive platform 
-        that brings real-time insights and organization to everyday farm 
-        management tasks. We aim to bridge the gap between traditional 
-        agricultural practices and modern technology—making farm data easier 
+        Farmified’s mission is to modernize how farmers track, manage, and
+        understand their operations by providing a simple, intuitive platform
+        that brings real-time insights and organization to everyday farm
+        management tasks. We aim to bridge the gap between traditional
+        agricultural practices and modern technology—making farm data easier
         to record, access, and use for better decision-making.
       </p>
 
@@ -35,7 +35,3 @@ export default function About() {
   );
 }
 
-
-    </div>
-  );
-}
