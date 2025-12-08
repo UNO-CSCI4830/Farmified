@@ -42,7 +42,7 @@ function Home() {
 
   const widgets = [
     { title: "Database", info: "Entries: 124", btn: "View", path: "/database" },
-    { title: "Messages", info: "Unread: 5", btn: "Check", path: "/messages" }
+    { title: "Messages", info: "Chat crops!", btn: "Connect", path: "/messages" }
   ];
 
   return (
