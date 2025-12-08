@@ -29,7 +29,13 @@ export default function About() {
         <li>Raja Atul Bhope</li>
         <li>Tristian Christopherson</li>
         <li>Eric Gonzalez</li>
+        <li>Sam Baratta</li>
       </ul>
+    </div>
+  );
+}
+
+
     </div>
   );
 }
