@@ -66,9 +66,9 @@ function Sidebar() {
           <div className="dropdown-title">Database</div>
           {hoverDropdown === "database" && (
             <div className="dropdown-content">
-              <Link to="/database/add">Add Entry</Link>
+              {/* <Link to="/database/add">Add Entry</Link> */}
               <Link to="/database">View Records</Link>
-              <Link to="/database/export">Export Data</Link>
+              {/* <Link to="/database/export">Export Data</Link> */}
             </div>
           )}
         </div>

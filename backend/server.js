@@ -366,6 +366,69 @@ app.post('/api/conversations', (req, res) => {
   );
 });
 
+
+// Update user by EricGonzalez 12/8
+app.put('/api/user/:id', (req, res) => {
+  const { id } = req.params;
+  const {
+    firstName,
+    lastName,
+    phone,
+    location,
+    farmName,
+    crops,
+    farmSize,
+    preferences,
+    deliveryAddress
+  } = req.body;
+
+  // Convert arrays to strings if sent from frontend
+  const cropsString = Array.isArray(crops) ? crops.join(', ') : crops;
+  const preferencesString = Array.isArray(preferences) ? preferences.join(', ') : preferences;
+
+  const query = `
+    UPDATE users SET
+      firstName = ?,
+      lastName = ?,
+      phone = ?,
+      location = ?,
+      farmName = ?,
+      crops = ?,
+      farmSize = ?,
+      preferences = ?,
+      deliveryAddress = ?
+    WHERE id = ?
+  `;
+
+  const values = [
+    firstName,
+    lastName,
+    phone,
+    location,
+    farmName,
+    cropsString,
+    farmSize,
+    preferencesString,
+    deliveryAddress,
+    id
+  ];
+
+  db.run(query, values, function (err) {
+    if (err) return res.status(500).json({ error: 'Database error' });
+
+    // After update, return the refreshed user object
+    db.get(
+      'SELECT id, firstName, lastName, email, phone, location, userType, farmName, crops, farmSize, preferences, deliveryAddress FROM users WHERE id = ?',
+      [id],
+      (err, updatedUser) => {
+        if (err) return res.status(500).json({ error: 'Error retrieving updated user' });
+
+        res.json({ message: 'User updated successfully', user: updatedUser });
+      }
+    );
+  });
+});
+
 // Start server
 app.listen(PORT, () => {
   console.log(`🚀 Server is running on http://localhost:${PORT}`);
