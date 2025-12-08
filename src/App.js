@@ -8,6 +8,8 @@ import MessageScreen from "./Pages/Messages";
 import Signup from "./Pages/Signup";
 import Profile from "./Pages/Profile";
 import "./app.css";
+import About from "./Pages/About";
+
 
 // Component to conditionally show sidebar
 function AppLayout({ children }) {
@@ -35,6 +37,7 @@ function App() {
           <Route path="/profile" element={<Profile />} />
           <Route path="/signup" element={<Signup />} />
           <Route path="/login" element={<Signup />} />
+          <Route path="/about" element={<About />} />
         </Routes>
       </AppLayout>
     </Router>
