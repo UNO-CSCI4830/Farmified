@@ -140,3 +140,78 @@
   justify-content: center;
   color: #666;
 }
+
+.add-user-section {
+  padding: 0.75rem 1rem;
+  border-bottom: 1px solid #eee;
+  background: #fff;
+}
+
+.add-user-button {
+  width: 100%;
+  background: #007bff;
+  color: white;
+  border: none;
+  padding: 0.6rem 1rem;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  cursor: pointer;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+}
+
+.add-user-button:hover {
+  background: #0069d9;
+}
+
+/* Smooth dropdown box under button */
+.add-user-input {
+  margin-top: 0.5rem;
+  display: flex;
+  gap: 0.5rem;
+  flex-direction: column;
+}
+
+.add-user-input input {
+  padding: 0.5rem 0.75rem;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 0.95rem;
+}
+
+.add-user-input button {
+  background: #28a745;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 0.5rem;
+  cursor: pointer;
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+.add-user-input button:hover {
+  background: #218838;
+}
+
+.sidebar2 {
+  width: 300px;               /* ← Set a fixed width */
+  min-width: 300px;           /* ← Prevent shrinking */
+  max-width: 300px;           /* ← Prevent expanding */
+  border-right: 1px solid #ddd;
+  background: #fff;
+  display: flex;
+  flex-direction: column;
+  overflow-y: hidden;         /* Prevent weird scroll clipping */
+}
+
+.sidebar-header {
+  padding: 1rem;
+  font-weight: bold;
+  font-size: 1.2rem;
+  border-bottom: 1px solid #eee;
+  background: #fff;
+}
