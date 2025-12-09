@@ -5,7 +5,7 @@ Test files can be found in src/tests for respective branches.
 
 Have react and node.js installed in local machine 
 
-After instalation completes if modules are not installed run
+After installation completes if modules are not installed run
 
 **npm install** on both the backend folder and the root folder
 
