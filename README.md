@@ -1,16 +1,34 @@
-"# Farmified" 
+# Farmified
 
+## Prerequisites
 
-Test files can be found in src/tests for respective branches.
+- React.js installed on your local machine
+- Node.js installed on your local machine
 
-Have react and node.js installed in local machine 
+## Installation
 
-After installation completes if modules are not installed run
+1. Install dependencies in the root folder:
+   ```bash
+   npm install
+   ```
 
-**npm install** on both the backend folder and the root folder
+2. Install dependencies in the backend folder:
+   ```bash
+   cd backend
+   npm install
+   ```
 
-After modules are installed you should be good to start the project
+## Running the Application
 
-**npm start** on both the backend folder and root folder
+1. Start the backend server:
+   ```bash
+   cd backend
+   npm start
+   ```
 
-After this is done it will automatically kick into default browser and the app is running 
+2. Start the frontend:
+   ```bash
+   npm start
+   ```
+
+The application will automatically open in your default browser.
